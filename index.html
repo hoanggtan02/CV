@@ -32,23 +32,9 @@ body {
   color:var(--text);
   min-height:100vh;
   overflow-x:hidden;
-  cursor:none;
 }
 
-/* ── CUSTOM CURSOR ── */
-.cursor { position:fixed; z-index:9999; pointer-events:none; }
-.cur-dot {
-  width:8px; height:8px; border-radius:50%;
-  background:var(--gold); top:-4px; left:-4px;
-  transition:transform .1s;
-}
-.cur-ring {
-  width:36px; height:36px; border-radius:50%;
-  border:1px solid rgba(201,168,76,.5);
-  top:-18px; left:-18px;
-  transition:transform .15s, width .3s, height .3s, border-color .3s;
-}
-body:hover .cur-dot { transform:scale(1); }
+
 
 /* ── NOISE OVERLAY ── */
 body::before {
@@ -594,10 +580,6 @@ body::before {
 </head>
 <body>
 
-<!-- Cursor -->
-<div class="cursor" id="cursorDot"><div class="cur-dot"></div></div>
-<div class="cursor" id="cursorRing"><div class="cur-ring"></div></div>
-
 <!-- Ambient -->
 <div class="glow-1"></div><div class="glow-2"></div><div class="glow-3"></div>
 
@@ -783,17 +765,6 @@ body::before {
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CURSOR ──
-const dot = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; dot.style.transform=`translate(${mx}px,${my}px)`; });
-(function animRing(){
-  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
-  ring.style.transform=`translate(${rx}px,${ry}px)`;
-  requestAnimationFrame(animRing);
-})();
-
 // ── SUPABASE ──
 const SUPA_URL = 'https://tdgljxwnqjcaqljvzgqp.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkZ2xqeHducWpjYXFsanZ6Z3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzODg1NDMsImV4cCI6MjA4ODk2NDU0M30.XIgc3EIGELwUj3kBYzIJqdjo6koy-JOc8do8NwEEZZ8';
