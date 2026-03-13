@@ -720,9 +720,13 @@ body::before {
 <div class="toast" id="toast"></div>
 
 <script>
-const SUPA_URL='https://tdgljxwnqjcaqljvzgqp.supabase.co';
-const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkZ2xqeHducWpjYXFsanZ6Z3FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzODg1NDMsImV4cCI6MjA4ODk2NDU0M30.XIgc3EIGELwUj3kBYzIJqdjo6koy-JOc8do8NwEEZZ8';
-const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
+const SUPA_URL = '%%SUPABASE_URL%%';
+const SUPA_KEY = '%%SUPABASE_KEY%%';
+if (!SUPA_URL || SUPA_URL === '%%SUPABASE_URL%%') {
+  document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;flex-direction:column;gap:12px;color:#8a8070"><h2>⚠️ Chưa cấu hình GitHub Secrets</h2><p>Thêm <code>SUPABASE_URL</code> và <code>SUPABASE_KEY</code> vào GitHub Secrets.</p></div>';
+  throw new Error('Missing secrets');
+}
+const sb = supabase.createClient(SUPA_URL, SUPA_KEY);
 const COVERS=['linear-gradient(135deg,#e8e0d0,#d5c9b5)','linear-gradient(135deg,#d5c9b5,#c4b99e)','linear-gradient(135deg,#e0d5c0,#ccc0a8)','linear-gradient(135deg,#d8d0be,#c8bda6)','linear-gradient(135deg,#ddd5c2,#cdc3ae)'];
 const SOCIAL_LABELS={github:'GitHub',linkedin:'LinkedIn',twitter:'Twitter',facebook:'Facebook',instagram:'Instagram',behance:'Behance',website:'Website'};
 const SOCIAL_ORDER=['github','linkedin','twitter','facebook','instagram','behance','website'];
