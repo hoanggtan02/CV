@@ -3,7 +3,7 @@ name: Deploy Portfolio to GitHub Pages
 on:
   push:
     branches:
-      - main  # Chạy mỗi khi push lên branch main
+      - main  
 
 permissions:
   contents: read
