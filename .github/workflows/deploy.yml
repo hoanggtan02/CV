@@ -3,7 +3,7 @@ name: Deploy Portfolio to GitHub Pages
 on:
   push:
     branches:
-      - main  
+      - main
 
 permissions:
   contents: read
@@ -33,13 +33,22 @@ jobs:
           sed -i "s|%%SUPABASE_URL%%|$SUPABASE_URL|g" index.html
           sed -i "s|%%SUPABASE_KEY%%|$SUPABASE_KEY|g" index.html
 
+      - name: Debug secrets
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          echo "URL length: ${#SUPABASE_URL}"
+          echo "KEY length: ${#SUPABASE_KEY}"
+          grep -c "%%SUPABASE_URL%%" index.html && echo "FAILED: placeholder still exists" || echo "OK: placeholder replaced"
+
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' 
+          path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
