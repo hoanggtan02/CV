@@ -30,8 +30,8 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
-          sed -i "s|%%SUPABASE_URL%%|$SUPABASE_URL|g" portfolio.html
-          sed -i "s|%%SUPABASE_KEY%%|$SUPABASE_KEY|g" portfolio.html
+          sed -i "s|%%SUPABASE_URL%%|$SUPABASE_URL|g" index.html
+          sed -i "s|%%SUPABASE_KEY%%|$SUPABASE_KEY|g" index.html
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
